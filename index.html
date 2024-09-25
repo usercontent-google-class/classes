@@ -618,35 +618,38 @@
             return jsonPlayers;
         }
 
-        function LanguageRequest() {
-            try {
-                myGameInstance.SendMessage('YandexGame', 'SetLanguage', ysdk.environment.i18n.lang);
-            } catch (e) {
-                console.error('CRASH Language Request: ', e.message);
-            }
-        }
+function LanguageRequest() {
+    try {
+        // Set default language to English if not already set
+        let defaultLanguage = ysdk.environment.i18n.lang || 'en';
+        myGameInstance.SendMessage('YandexGame', 'SetLanguage', defaultLanguage);
+    } catch (e) {
+        console.error('CRASH Language Request: ', e.message);
+    }
+}
 
-        function RequestingEnvironmentData() {
-            try {
-                let jsonEnvir = {
-                    "language": ysdk.environment.i18n.lang,
-                    "domain": ysdk.environment.i18n.tld,
-                    "deviceType": ysdk.deviceInfo.type,
-                    "isMobile": ysdk.deviceInfo.isMobile(),
-                    "isDesktop": ysdk.deviceInfo.isDesktop(),
-                    "isTablet": ysdk.deviceInfo.isTablet(),
-                    "isTV": ysdk.deviceInfo.isTV(),
-                    "appID": ysdk.environment.app.id,
-                    "browserLang": ysdk.environment.browser.lang,
-                    "payload": ysdk.environment.payload,
-                    "promptCanShow": promptCanShow,
-                    "reviewCanShow": reviewCanShow
-                };
-                myGameInstance.SendMessage('YandexGame', 'SetEnvironmentData', JSON.stringify(jsonEnvir));
-            } catch (e) {
-                console.error('CRASH Requesting Environment Data: ', e.message);
-            }
-        }
+function RequestingEnvironmentData() {
+    try {
+        let jsonEnvir = {
+            "language": ysdk.environment.i18n.lang || 'en', // Default to English
+            "domain": ysdk.environment.i18n.tld,
+            "deviceType": ysdk.deviceInfo.type,
+            "isMobile": ysdk.deviceInfo.isMobile(),
+            "isDesktop": ysdk.deviceInfo.isDesktop(),
+            "isTablet": ysdk.deviceInfo.isTablet(),
+            "isTV": ysdk.deviceInfo.isTV(),
+            "appID": ysdk.environment.app.id,
+            "browserLang": ysdk.environment.browser.lang || 'en', // Default to English
+            "payload": ysdk.environment.payload,
+            "promptCanShow": promptCanShow,
+            "reviewCanShow": reviewCanShow
+        };
+        myGameInstance.SendMessage('YandexGame', 'SetEnvironmentData', JSON.stringify(jsonEnvir));
+    } catch (e) {
+        console.error('CRASH Requesting Environment Data: ', e.message);
+    }
+}
+
 
         function Review() {
             try {
