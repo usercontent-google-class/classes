@@ -8,6 +8,7 @@
 <title>Stand on the right color, Robby!</title>
 <link rel="shortcut icon" href="TemplateData/favicon.ico"/>
 <link rel="stylesheet" href="TemplateData/style.css"/>
+<script src="https://app-269613.games.s3.yandex.net/sdk/_/v2.574cf6742687042bf236.js"></script>
 <style>
   /* Убираем выделение по нажатию клавиш */
   canvas:focus {
@@ -127,7 +128,6 @@
             });
         };
 
-        setTimeout(StartUnityInstance_IfUnloaded, 5000);
         InitYandex();
         function InitYandex() {
             YaGames.init()
