@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Car arena</title>
-<link rel="stylesheet" href="TemplateData/style.css"/>
-<script src="TemplateData/gamescore-unity.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/TemplateData/style.css"/>
+<script src="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/TemplateData/gamescore-unity.js"></script>
 <script>
     var _unityAwaiter = {};
     _unityAwaiter.ready = new Promise((resolve, reject) => {
@@ -25,7 +25,9 @@
       window.GameScore = new GameScoreUnity(gs, unityI);
     };
   </script>
-
+<!-- >>> replace with your gamescore load script here <<< -->
+<script async="" src="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/game-score.js?projectId=3795&publicToken=nWvSTkesRP9VdDIjNsJi3TeGiKDH37NC&callback=onGSInit"></script>
+<!-- >>> replace with your gamescore load script here <<< -->
 </head>
 <body class="dark">
 <div id="unity-container" class="unity-desktop">
