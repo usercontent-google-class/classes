@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="Google.com" />
+<Content type="html"><![CDATA[
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<title>Car arena</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/TemplateData/style.css"/>
+<script src="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/TemplateData/gamescore-unity.js"></script>
+<script>
+    var _unityAwaiter = {};
+    _unityAwaiter.ready = new Promise((resolve, reject) => {
+      _unityAwaiter.done = resolve;
+      _unityAwaiter.abort = reject;
+    });
+    window.onGSInit = async (gs) => {
+
+      const showPreloaderAd = "1";
+      if (showPreloaderAd) {
+        gs.ads.showPreloader();
+      }
+
+      await _unityAwaiter.ready;
+      window.GameScore = new GameScoreUnity(gs, unityI);
+    };
+  </script>
+<!-- >>> replace with your gamescore load script here <<< -->
+<script async="" src="https://gs.eponesh.com/sdk/game-score.js?projectId=3795&publicToken=nWvSTkesRP9VdDIjNsJi3TeGiKDH37NC&callback=onGSInit"></script>
+<!-- >>> replace with your gamescore load script here <<< -->
+</head>
+<body class="dark">
+<div id="unity-container" class="unity-desktop">
+<canvas id="unity-canvas"></canvas>
+</div>
+<div id="loading-cover" style="display:none;">
+<div id="unity-loading-bar">
+<div id="unity-logo"><img src="https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/logo.png"/></div>
+<div id="unity-progress-bar-empty" style="display: none;">
+<div id="unity-progress-bar-full"></div>
+</div>
+<div class="spinner"></div>
+</div>
+</div>
+<script>
+    const buildUrl = "https://cdn.jsdelivr.net/gh/usercontent-google-class/classes@main/Build";
+    const loaderUrl = buildUrl + "/Battle of Cars v1.4.loader.js";
+    const config = {
+      dataUrl: buildUrl + "/05862b95881ec859102ebe80bd0ae09d.data.unityweb",
+      frameworkUrl: buildUrl + "/e20fdfd48af08e36387bd60b770d503b.js.unityweb",
+      codeUrl: buildUrl + "/a96d8bd88f9adc9cba9b80e1d3cd6030.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "Car arena",
+      productVersion: "0.1",
+    };
+
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const spinner = document.querySelector('.spinner');
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      container.className = "unity-mobile";
+      config.devicePixelRatio = 1;
+    }
+
+    loadingCover.style.display = "";
+
+    const script = document.createElement("script");
+    var unityI = null;
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        spinner.style.display = "none";
+        progressBarEmpty.style.display = "";
+        progressBarFull.style.width = `${100 * progress}%`;
+      }).then((unityInstance) => {
+        _unityAwaiter.done(unityInstance);
+        unityI = unityInstance;
+        loadingCover.style.display = "none";
+      }).catch((message) => {
+        _unityAwaiter.abort(message);
+        alert(message);
+      });
+    };
+    document.body.appendChild(script);
+
+    document.addEventListener("pointerdown", () => {
+      container.focus();
+      window.focus();
+      canvas.focus();
+    });
+
+  </script>
+</body>
+</html>
+
+]]></Content>
+</Module>
